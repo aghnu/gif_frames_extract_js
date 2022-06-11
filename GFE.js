@@ -364,7 +364,7 @@ GFE is a simplification of the forked project libgif-js 'https://github.com/buzz
         };
     };
 
-    const GFE = function (srcURL, callback = () => {}) {
+    const GFE = function (srcURL, callback = () => {}, postframecallback = () => {}) {
 
         const frames = [];
         const tmpCanvas = document.createElement('canvas');
@@ -392,10 +392,13 @@ GFE is a simplification of the forked project libgif-js 'https://github.com/buzz
 
         function pushFrame() {
             if (!frame) return;
-            frames.push({
-                data: frame.getImageData(0, 0, hdr.width, hdr.height),
+            const data = frame.getImageData(0, 0, hdr.width, hdr.height);
+            const aFrame = {
+                data: data,
                 delay: delay
-            });
+            }
+            frames.push(aFrame);
+            postframecallback(aFrame);
         };
 
         function setSizes(w, h) {
