@@ -5,8 +5,11 @@ GFE is a simplification of the project [libgif-js](https://github.com/buzzfeed/l
 ```html
 <script src='./GFE.js'></script>
 <script>
+  // GFE(gif_src_url, post_all_frames_callback, post_one_frame_callback);
+  // example:
   GFE(gif_src_url, (frames) => {
-    // your code goes here
+    // function is called after all frames are extracted
+    // an array of frames is passed to function
     /*
       frames[i]:
       {
@@ -14,6 +17,9 @@ GFE is a simplification of the project [libgif-js](https://github.com/buzzfeed/l
         delay: int
       }
     */
+  }, (frame) => {
+    // function is called after each frame extraction
+    // the frame is passed to function
   });
 </script>
 ```
